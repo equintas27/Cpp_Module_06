@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   ScalarUtils.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equintas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/20 15:54:24 by equintas          #+#    #+#             */
-/*   Updated: 2026/08/20 15:54:26 by equintas         ###   ########.fr       */
+/*   Created: 2026/08/20 16:32:19 by equintas          #+#    #+#             */
+/*   Updated: 2026/08/20 16:32:21 by equintas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
+#ifndef SCALARUTILS_HPP
+# define SCALARUTILS_HPP
 
 #include <string>
-#include <iostream>
 
-class ScalarConverter 
-{
-    public:
-        static void convert(const std::string &literal);
-    private:
-        ScalarConverter();
-        ScalarConverter(const ScalarConverter &src);
-        ScalarConverter& operator=(const ScalarConverter &rhs);
-        ~ScalarConverter();
-};
+bool IsChar(const std::string& literal);
+bool IsInt(const std::string& literal);
+bool IsFloat(const std::string& literal);
+bool IsDouble(const std::string& literal);
+bool IsPseudoFloat(const std::string& literal);
+bool IsPseudoDouble(const std::string& literal);
 
-#endif
+
+
+#endif 
