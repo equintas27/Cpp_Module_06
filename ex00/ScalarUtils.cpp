@@ -63,6 +63,7 @@ bool IsFloat(const std::string& literal)
 {
     size_t i = 0;
     int dot = 0;
+    int digit = 0;
 
     if (literal.empty())
         return (false);
@@ -80,11 +81,13 @@ bool IsFloat(const std::string& literal)
                 return (false);
             dot = 1;
         }
-        else if (!std::isdigit(literal[i]))
+        else if (std::isdigit(literal[i]))
+            digit = 1;
+        else
             return (false);
         i++;
     }
-    if (!dot)
+    if (!dot || !digit)
         return (false);
     return (true);
 }
