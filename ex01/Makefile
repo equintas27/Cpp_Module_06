@@ -14,16 +14,13 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-HEADER = ScalarConverter.hpp \
-		 PrintUtils.hpp \
-		 ScalarUtils.hpp
+HEADER = Serializer.hpp \
+		 Data.hpp
 
-OBJS = ScalarConverter.o \
-	   ScalarUtils.o \
-	   PrintUtils.o \
+OBJS = Serializer.o \
 	   main.o
 
-NAME = Convert
+NAME = Serializer
 
 all: $(NAME)
 
