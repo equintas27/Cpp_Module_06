@@ -5,13 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: equintas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/20 16:32:31 by equintas          #+#    #+#             */
-/*   Updated: 2026/08/20 16:32:33 by equintas         ###   ########.fr       */
+/*   Created: 2026/08/21 13:23:07 by equintas          #+#    #+#             */
+/*   Updated: 2026/08/21 13:23:12 by equintas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarUtils.hpp"
 #include <iostream>
+
+
+bool IsPseudoFloat(const std::string& literal)
+{
+    if (literal.empty())
+        return (false);
+    if (literal == "nanf" || literal == "-inff" || literal == "+inff")
+        return (true);
+    return (false);
+
+}
+
+bool IsPseudoDouble(const std::string& literal)
+{
+    if (literal.empty())
+        return (false);
+    if (literal == "nan" || literal == "-inf" || literal == "+inf")
+        return (true);
+    return (false);
+}
 
 bool IsChar(const std::string& literal)
 {
@@ -95,31 +115,4 @@ bool IsDouble(const std::string& literal)
     if (!dot)
         return (false);
     return (true);
-}
-
-bool IsPseudoFloat(const std::string& literal)
-{
-    if (literal.empty())
-        return (false);
-    if (literal == "nanf" || literal == "-inff" || literal == "+inff")
-        return (true);
-    return (false);
-
-}
-
-bool IsPseudoDouble(const std::string& literal)
-{
-    if (literal.empty())
-        return (false);
-    if (literal == "nan" || literal == "-inf" || literal == "+inf")
-        return (true);
-    return (false);
-}
-
-int main(void)
-{
-    std::cout << std::boolalpha;
-    std::cout << IsInt("+42") << std::endl;
-    std::cout << IsFloat("+42f") << std::endl;
-    std::cout << IsDouble("-0.0") << std::endl;
 }
