@@ -19,6 +19,8 @@
 #include <limits.h>
 #include <cfloat>
 #include <iomanip>
+#include <cerrno>
+#include <cmath>
 
 void PrintChar(const std::string& literal);
 void PrintInt(const std::string& literal);

@@ -14,6 +14,8 @@
 # define SCALARUTILS_HPP
 
 #include <string>
+#include <cctype>
+#include <cstdlib>
 
 bool IsChar(const std::string& literal);
 bool IsInt(const std::string& literal);
@@ -21,7 +23,5 @@ bool IsFloat(const std::string& literal);
 bool IsDouble(const std::string& literal);
 bool IsPseudoFloat(const std::string& literal);
 bool IsPseudoDouble(const std::string& literal);
-
-
 
 #endif 

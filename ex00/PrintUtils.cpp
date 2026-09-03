@@ -23,7 +23,32 @@ void PrintChar(const std::string& literal)
 
 void PrintInt(const std::string& literal)
 {
+    errno = 0;
     long numb = std::strtol(literal.c_str(), NULL, 10);
+
+    if (errno == ERANGE)
+    {
+        std::cout << "char: impossible " << std::endl;
+        std::cout << "int: impossible " << std::endl;
+
+        float f = std::strtof(literal.c_str(), NULL);
+        if (f >= -FLT_MAX && f <= FLT_MAX)
+            std::cout << "float: "
+                      << std::fixed << std::setprecision(1)
+                      << f << "f" << std::endl;
+        else
+            std::cout << "float: impossible " << std::endl;
+
+        double d = std::strtod(literal.c_str(), NULL);
+        if (d >= -DBL_MAX && d <= DBL_MAX)
+            std::cout << "double: "
+                      << std::fixed << std::setprecision(1)
+                      << d << std::endl;
+        else
+            std::cout << "double: impossible " << std::endl;
+
+        return;
+    }
          
     if (numb >= CHAR_MIN && numb <= CHAR_MAX)
     {
@@ -45,7 +70,7 @@ void PrintInt(const std::string& literal)
     if (numb >= -DBL_MAX && numb <= DBL_MAX)
         std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(numb) << std::endl;
     else
-        std::cout << ": impossible " << std::endl;
+        std::cout << "double: impossible " << std::endl;
        
 }
 
@@ -72,7 +97,7 @@ void PrintFloat(const std::string& literal)
     if (numb >= -DBL_MAX && numb <= DBL_MAX)
         std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(numb) << std::endl;
     else
-        std::cout << ": impossible " << std::endl;
+        std::cout << "double: impossible " << std::endl;
 }
 
 void PrintDouble(const std::string& literal)
@@ -98,7 +123,7 @@ void PrintDouble(const std::string& literal)
     if (numb >= -DBL_MAX && numb <= DBL_MAX)
         std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(numb) << std::endl;
     else
-        std::cout << ": impossible " << std::endl;
+        std::cout << "double: impossible " << std::endl;
 }
 
 void PrintPseudoFloat(const std::string& literal)

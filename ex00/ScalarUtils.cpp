@@ -59,63 +59,27 @@ bool IsInt(const std::string& literal)
     return (true);
 }
 
+
 bool IsFloat(const std::string& literal)
 {
-    size_t i = 0;
-    int dot = 0;
-    int digit = 0;
+    if (literal.length() <= 1 || (literal[literal.length() - 1] != 'f' && literal[literal.length() - 1] != 'F'))
+        return false;
 
-    if (literal.empty())
-        return (false);
-    if (literal[i] == '-' || literal[i] == '+')
-        i++;
-    if (literal[literal.length() - 1] != 'f')
-        return (false);
-    if (i == literal.length())
-        return (false);
-    while(i < literal.length() - 1)
-    {
-        if (literal[i] == '.')
-        {
-            if (dot)
-                return (false);
-            dot = 1;
-        }
-        else if (std::isdigit(literal[i]))
-            digit = 1;
-        else
-            return (false);
-        i++;
-    }
-    if (!dot || !digit)
-        return (false);
-    return (true);
+    std::string numPart = literal.substr(0, literal.length() - 1);
+    
+    char* endptr = NULL;
+    strtof(numPart.c_str(), &endptr);
+    
+    return (endptr != numPart.c_str() && *endptr == '\0');
 }
 
 bool IsDouble(const std::string& literal)
 {
-     size_t i = 0;
-    int dot = 0;
+    if (literal.find('.') == std::string::npos && literal.find('e') == std::string::npos && literal.find('E') == std::string::npos)
+        return false;
 
-    if (literal.empty())
-        return (false);
-    if (literal[i] == '-' || literal[i] == '+')
-        i++;
-    if (i == literal.length())
-        return (false);
-    while(i < literal.length())
-    {
-        if (literal[i] == '.')
-        {
-            if (dot)
-                return (false);
-            dot = 1;
-        }
-        else if (!std::isdigit(literal[i]))
-            return (false);
-        i++;
-    }
-    if (!dot)
-        return (false);
-    return (true);
+    char* endptr = NULL;
+    strtod(literal.c_str(), &endptr);
+
+    return (endptr != literal.c_str() && *endptr == '\0');
 }
