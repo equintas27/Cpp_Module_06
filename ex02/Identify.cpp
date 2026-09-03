@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "Identify.hpp"
-#include <typeinfo>
 
 Base * generate(void)
 {
