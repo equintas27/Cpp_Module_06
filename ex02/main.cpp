@@ -24,6 +24,5 @@ int main()
         identify(*p);
         delete p;
     }
-    
     return (0);
 }

@@ -19,7 +19,6 @@ struct Data
 {
     std::string name;
     int value;
-
 };
 
 #endif

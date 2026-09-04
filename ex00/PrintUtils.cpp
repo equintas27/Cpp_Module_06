@@ -14,7 +14,11 @@
 
 void PrintChar(const std::string& literal)
 {
-    char c = literal[0];
+    char c = ' ';
+    if (literal.length() == 1)
+        c = literal[0];
+    else if (literal.length() == 3)
+        c = literal[1];
     std::cout << "char: '" << c << "'" << std::endl;
     std::cout << "int: " << static_cast<int>(c) << std::endl;
     std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(c) << "f" << std::endl;
@@ -46,7 +50,6 @@ void PrintInt(const std::string& literal)
                       << d << std::endl;
         else
             std::cout << "double: impossible " << std::endl;
-
         return;
     }
          

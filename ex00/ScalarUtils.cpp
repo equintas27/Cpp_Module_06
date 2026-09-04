@@ -37,6 +37,8 @@ bool IsChar(const std::string& literal)
 {
     if (literal.length() == 1 && !std::isdigit(literal[0]))
         return (true);
+    else if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
+        return (true);
     return (false);
 }
 
@@ -62,24 +64,68 @@ bool IsInt(const std::string& literal)
 
 bool IsFloat(const std::string& literal)
 {
-    if (literal.length() <= 1 || (literal[literal.length() - 1] != 'f' && literal[literal.length() - 1] != 'F'))
+    if (literal.length() <= 1)
         return false;
 
-    std::string numPart = literal.substr(0, literal.length() - 1);
-    
-    char* endptr = NULL;
-    strtof(numPart.c_str(), &endptr);
-    
-    return (endptr != numPart.c_str() && *endptr == '\0');
+    if (literal[literal.length() - 1] != 'f')
+        return false;
+
+    bool dot = false;
+    bool exponent = false;
+    bool digit = false;
+
+    for (size_t i = 0; i < literal.length() - 1; i++)
+    {
+        if (std::isdigit(literal[i]))
+            digit = true;
+
+        else if (literal[i] == '.' && !dot && !exponent)
+            dot = true;
+
+        else if ((literal[i] == 'e' || literal[i] == 'E')
+                 && digit && !exponent)
+        {
+            exponent = true;
+            digit = false;
+        }
+
+        else if ((literal[i] == '+' || literal[i] == '-')
+                 && (i == 0 || literal[i - 1] == 'e'
+                 || literal[i - 1] == 'E'))
+            continue;
+
+        else
+            return false;
+    }
+
+    return (digit && (dot || exponent));
 }
 
 bool IsDouble(const std::string& literal)
 {
-    if (literal.find('.') == std::string::npos && literal.find('e') == std::string::npos && literal.find('E') == std::string::npos)
-        return false;
+    bool dot = false;
+    bool exponent = false;
+    bool digit = false;
 
-    char* endptr = NULL;
-    strtod(literal.c_str(), &endptr);
+    for (size_t i = 0; i < literal.length(); i++)
+    {
+        if (std::isdigit(literal[i]))
+            digit = true;
+        else if (literal[i] == '.' && !dot && !exponent)
+            dot = true;
+        else if ((literal[i] == 'e' || literal[i] == 'E')
+                 && digit && !exponent)
+        {
+            exponent = true;
+            digit = false;
+        }
+        else if ((literal[i] == '+' || literal[i] == '-')
+                 && (i == 0 || literal[i - 1] == 'e'
+                 || literal[i - 1] == 'E'))
+            continue;
+        else
+            return false;
+    }
 
-    return (endptr != literal.c_str() && *endptr == '\0');
+    return (digit && (dot || exponent));
 }
